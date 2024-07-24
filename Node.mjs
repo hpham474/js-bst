@@ -26,3 +26,5 @@ class Node {
     return this.right;
   }
 }
+
+export default Node;
