@@ -14,18 +14,40 @@ class Tree {
       ),
     ];
 
-    return sortedArray;
+    console.log(sortedArray);
+
+    const bst = this.buildBST(sortedArray, 0, sortedArray.length - 1);
+
+    this.root = bst;
   }
-  prettyPrint(node, prefix = "", isLeft = true) {
+  buildBST(array, start, end) {
+    if (start > end) {
+      return null;
+    }
+
+    const mid = Math.floor((start + end) / 2);
+    const node = new Node();
+
+    node.data = array[mid];
+    node.left = this.buildBST(array, start, mid - 1);
+    node.right = this.buildBST(array, mid + 1, end);
+
+    return node;
+  }
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
     }
     if (node.right !== null) {
-      prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     if (node.left !== null) {
-      prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   }
   insert() {}

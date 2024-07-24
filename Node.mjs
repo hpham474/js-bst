@@ -1,13 +1,13 @@
 class Node {
-  value;
+  data;
   left;
   right;
   constructor() {
-    value = null;
-    left = null;
-    right = null;
+    this.data = null;
+    this.left = null;
+    this.right = null;
   }
-  set value(value) {
+  set data(value) {
     this.value = value;
   }
   set left(node) {
@@ -16,7 +16,7 @@ class Node {
   set right(node) {
     this.right = node;
   }
-  get value() {
+  get data() {
     return this.value;
   }
   get left() {
