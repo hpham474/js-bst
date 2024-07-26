@@ -3,7 +3,7 @@ import Node from "./Node.mjs";
 class Tree {
   root;
   constructor(array) {
-    array = this.buildTree(array);
+    this.buildTree(array);
   }
   buildTree(array) {
     const sortedArray = [
@@ -50,7 +50,32 @@ class Tree {
       this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   }
-  insert() {}
+  insert(value) {
+    let node = this.root;
+    const newNode = new Node();
+    newNode.data = value;
+
+    while (node !== null) {
+      if (node.data === value) {
+        return;
+      }
+      if (node.data < value) {
+        if (node.right === null) {
+          node.right = newNode;
+          return;
+        } else {
+          node = node.right;
+        }
+      } else {
+        if (node.left === null) {
+          node.left = newNode;
+          return;
+        } else {
+          node = node.left;
+        }
+      }
+    }
+  }
   deleteItem() {}
   find() {}
   levelOrder(callback) {}
@@ -61,6 +86,9 @@ class Tree {
   depth(node) {}
   isBalanced() {}
   rebalance() {}
+  root() {
+    return this.root;
+  }
 }
 
 export default Tree;
