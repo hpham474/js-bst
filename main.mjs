@@ -9,6 +9,8 @@ const bst = new Tree(array);
 
 bst.prettyPrint();
 
-bst.postOrder(print);
+bst.deleteItem(1);
+bst.deleteItem(3);
+console.log(bst.isBalanced());
 
 bst.prettyPrint();

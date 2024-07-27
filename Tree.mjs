@@ -270,7 +270,24 @@ class Tree {
       return -1;
     }
   }
-  isBalanced() {}
+  isBalanced(node = this.root) {
+    if (node === null) {
+      return true;
+    }
+
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(node.left) === true &&
+      this.isBalanced(node.right) === true
+    ) {
+      return true;
+    }
+
+    return false;
+  }
   rebalance() {}
 }
 
