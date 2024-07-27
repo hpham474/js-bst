@@ -5,6 +5,9 @@ class Tree {
   constructor(array) {
     this.buildTree(array);
   }
+  get root() {
+    return this.root;
+  }
   buildTree(array) {
     const sortedArray = [
       ...new Set(
@@ -55,6 +58,10 @@ class Tree {
     const newNode = new Node();
     newNode.data = value;
 
+    if (node === null) {
+      this.root = newNode;
+      return;
+    }
     while (node !== null) {
       if (node.data === value) {
         return;
@@ -76,8 +83,79 @@ class Tree {
       }
     }
   }
-  deleteItem() {}
-  find() {}
+  deleteItem(value) {
+    let node = this.root;
+    let prev = null;
+
+    // get node to delete
+    while (node !== null && node.data !== value) {
+      prev = node;
+      if (value < node.data) {
+        node = node.left;
+      } else {
+        node = node.right;
+      }
+    }
+
+    // no child case
+    if (node.left === null && node.right === null) {
+      // root case
+      if (node === this.root) {
+        this.root = null;
+        return;
+      }
+      // delete node by making children of previous node null
+      if (node === prev.left) {
+        prev.left = null;
+      } else {
+        prev.right = null;
+      }
+    }
+    // one child case
+    else if (node.left === null || node.right === null) {
+      // get remaining child
+      let child = null;
+      if (node.left === null) {
+        child = node.right;
+      } else {
+        child = node.left;
+      }
+
+      // root case
+      if (node === this.root) {
+        this.root = child;
+        return;
+      }
+
+      // assign child to previous node
+      if (node === prev.left) {
+        prev.left = child;
+      } else {
+        prev.right = child;
+      }
+    }
+    // two children
+    else {
+      // get next biggest node
+      let nextBiggestParent = node;
+      let nextBiggest = node.right;
+      while (nextBiggest.left !== null) {
+        nextBiggestParent = nextBiggest;
+        nextBiggest = nextBiggest.left;
+      }
+
+      // assign node value to the nextBiggest value
+      node.data = nextBiggest.data;
+
+      // delete the nextBiggest node
+      if (nextBiggestParent !== node) {
+        nextBiggestParent.left = nextBiggest.right;
+      } else {
+        nextBiggestParent.right = nextBiggest.right;
+      }
+    }
+  }
+  find(value) {}
   levelOrder(callback) {}
   inOrder(callback) {}
   preOrder(callback) {}
@@ -86,9 +164,6 @@ class Tree {
   depth(node) {}
   isBalanced() {}
   rebalance() {}
-  root() {
-    return this.root;
-  }
 }
 
 export default Tree;
