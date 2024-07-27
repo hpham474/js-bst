@@ -171,10 +171,68 @@ class Tree {
 
     return null;
   }
-  levelOrder(callback) {}
-  inOrder(callback) {}
-  preOrder(callback) {}
-  postOrder(callback) {}
+  levelOrder(callback) {
+    if (callback === undefined) {
+      console.error("Callback arguement needed");
+    }
+    if (this.root === null) {
+      return;
+    }
+    const queue = [];
+    queue.push(this.root);
+
+    while (queue.length !== 0) {
+      const node = queue.shift();
+
+      callback(node);
+
+      if (node.left !== null) {
+        queue.push(node.left);
+      }
+      if (node.right !== null) {
+        queue.push(node.right);
+      }
+    }
+  }
+  inOrder(callback, node = this.root) {
+    if (callback === undefined) {
+      console.error("Callback arguement needed");
+    }
+
+    if (node === null) {
+      return;
+    }
+
+    this.inOrder(callback, node.left);
+    callback(node);
+    this.inOrder(callback, node.right);
+  }
+  preOrder(callback, node = this.root) {
+    if (callback === undefined) {
+      console.error("Callback arguement needed");
+    }
+
+    if (node === null) {
+      return;
+    }
+
+    callback(node);
+    this.preOrder(callback, node.left);
+    this.preOrder(callback, node.right);
+  }
+  postOrder(callback, node = this.root) {
+    if (callback === undefined) {
+      console.error("Callback arguement needed");
+    }
+
+    if (node === null) {
+      return;
+    }
+
+    this.postOrder(callback, node.left);
+    this.postOrder(callback, node.right);
+    callback(node);
+  }
   height(node) {
     if (node === null) {
       return -1;
