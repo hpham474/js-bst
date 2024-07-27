@@ -4,14 +4,43 @@ function print(node) {
   console.log(node.data);
 }
 
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+function getArray() {
+  const array = [];
+  const SIZE = 100;
+  for (let i = 0; i < SIZE; i++) {
+    array.push(Math.floor(Math.random() * 100));
+  }
+
+  return array;
+}
+
+const array = getArray();
+
 const bst = new Tree(array);
-
-bst.prettyPrint();
-
-bst.deleteItem(1);
-bst.deleteItem(3);
 console.log(bst.isBalanced());
 
+console.log("Level Order");
+bst.levelOrder(print);
+console.log("PreOrder");
+bst.preOrder(print);
+console.log("PostOrder");
+bst.postOrder(print);
+console.log("InOrder");
+bst.inOrder(print);
+
+bst.insert(153);
+bst.insert(147);
+bst.insert(253);
+
+console.log(bst.isBalanced());
 bst.rebalance();
-bst.prettyPrint();
+console.log(bst.isBalanced());
+
+console.log("Level Order");
+bst.levelOrder(print);
+console.log("PreOrder");
+bst.preOrder(print);
+console.log("PostOrder");
+bst.postOrder(print);
+console.log("InOrder");
+bst.inOrder(print);
