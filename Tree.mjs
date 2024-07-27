@@ -155,7 +155,22 @@ class Tree {
       }
     }
   }
-  find(value) {}
+  find(value) {
+    let node = this.root;
+
+    while (node !== null) {
+      if (node.data === value) {
+        return node;
+      }
+      if (node.data < value) {
+        node = node.right;
+      } else {
+        node = node.left;
+      }
+    }
+
+    return null;
+  }
   levelOrder(callback) {}
   inOrder(callback) {}
   preOrder(callback) {}

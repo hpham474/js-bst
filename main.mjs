@@ -5,6 +5,6 @@ const bst = new Tree(array);
 
 bst.prettyPrint();
 
-bst.deleteItem(5);
+console.log(bst.find(6));
 
 bst.prettyPrint();
