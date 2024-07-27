@@ -5,6 +5,6 @@ const bst = new Tree(array);
 
 bst.prettyPrint();
 
-console.log(bst.find(6));
+console.log(bst.depth(bst.find(7)));
 
 bst.prettyPrint();

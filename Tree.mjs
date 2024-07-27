@@ -175,8 +175,43 @@ class Tree {
   inOrder(callback) {}
   preOrder(callback) {}
   postOrder(callback) {}
-  height(node) {}
-  depth(node) {}
+  height(node) {
+    if (node === null) {
+      return -1;
+    }
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+  depth(node) {
+    if (node === null) {
+      return -1;
+    }
+    let count = 0;
+    let current = this.root;
+    let found = false;
+
+    while (current !== null) {
+      if (current.data === node.data) {
+        found = true;
+        break;
+      }
+      if (current.data < node.data) {
+        current = current.right;
+      } else {
+        current = current.left;
+      }
+      count++;
+    }
+
+    if (found) {
+      return count;
+    } else {
+      return -1;
+    }
+  }
   isBalanced() {}
   rebalance() {}
 }
