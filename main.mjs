@@ -13,4 +13,5 @@ bst.deleteItem(1);
 bst.deleteItem(3);
 console.log(bst.isBalanced());
 
+bst.rebalance();
 bst.prettyPrint();

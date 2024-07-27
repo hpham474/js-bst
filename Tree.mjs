@@ -17,8 +17,6 @@ class Tree {
       ),
     ];
 
-    console.log(sortedArray);
-
     const bst = this.buildBST(sortedArray, 0, sortedArray.length - 1);
 
     this.root = bst;
@@ -288,7 +286,16 @@ class Tree {
 
     return false;
   }
-  rebalance() {}
+  rebalance() {
+    const array = [];
+    function traverse(node) {
+      array.push(node.data);
+    }
+
+    this.levelOrder(traverse);
+
+    this.buildTree(array);
+  }
 }
 
 export default Tree;
